@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "source_archive": "AutonomousSecurityEngineer (3)(1).zip",
+  "source_archive_sha256": "6e035ba89ffebf54abcfc19a5951040fabd636f4521d6409173155fa006ec9b6",
+  "installation_root": "existing AutonomousSecurityEngineer project",
+  "file_count": 34,
+  "files": [
+    {
+      "path": "ASE_UPDATE_TEST_RESULTS.json",
+      "change": "added",
+      "sha256": "f039d1769280375ffbda30563fa118124dc3ae210da860be825da332d7a78818",
+      "original_sha256": null,
+      "size_bytes": 1748
+    },
+    {
+      "path": "Apply-ASE-Update.ps1",
+      "change": "added",
+      "sha256": "250aad0574386e2755f4aa02b231cf5622b9e4a9774529a622a783faba222cef",
+      "original_sha256": null,
+      "size_bytes": 4286
+    },
+    {
+      "path": "Restore-ASE-Update.ps1",
+      "change": "added",
+      "sha256": "64b26a061bbf1dc45541a4157621e9a73eab5578d87f11456002bd6f92bc5d11",
+      "original_sha256": null,
+      "size_bytes": 1991
+    },
+    {
+      "path": "START_HERE_ASE_UPDATE.md",
+      "change": "added",
+      "sha256": "9ed830150fe8c99023ba64abd59df1b0088081160c569ea2607b355a8ec156f3",
+      "original_sha256": null,
+      "size_bytes": 8493
+    },
+    {
+      "path": "backend/Dockerfile",
+      "change": "modified",
+      "sha256": "062ea24633b5b1cac4f550ece26ec86b83e25e9eee274d2bf51cc47af10b501b",
+      "original_sha256": "fe411dfee3e5681f9b772a627c0de0186485392d70978a17d4f95f2ae1c627e5",
+      "size_bytes": 1264
+    },
+    {
+      "path": "backend/alembic/versions/f19b6c20aa01_remediation_batches.py",
+      "change": "added",
+      "sha256": "add7be55bbeaf167b13999e5ffd64291121e7c220f774910b12d6fb8e8cdd389",
+      "original_sha256": null,
+      "size_bytes": 1708
+    },
+    {
+      "path": "backend/app/ai/prompts.py",
+      "change": "modified",
+      "sha256": "37b31e57f9aa2039dc0505038cb090c852676175645ef45404685131cef996d7",
+      "original_sha256": "2dee9a208a62e486528e4b30ed03e67d9abe84c8c168ee3ec824a863939c7a95",
+      "size_bytes": 4737
+    },
+    {
+      "path": "backend/app/api/remediation.py",
+      "change": "modified",
+      "sha256": "9d4810306c5e352652b1f43bdf0228232f8e54622180b56553e2b789b321cd57",
+      "original_sha256": "9204dee39091997fc0c45290768598f747e90a0ff3c58a6fd16bec37522909ba",
+      "size_bytes": 25454
+    },
+    {
+      "path": "backend/app/models/__init__.py",
+      "change": "modified",
+      "sha256": "b1bc175613d9953d4bf2ee9e92d35c06ac1065a45cdac80264129adb482f21aa",
+      "original_sha256": "d8e459c3cb10b22ca55aa08f01683f2a722827c8f75b8d7077e188d0e8795692",
+      "size_bytes": 480
+    },
+    {
+      "path": "backend/app/models/remediation.py",
+      "change": "modified",
+      "sha256": "9404936ac27759d894ebe616cb3f12789a1b6aec0d952c4696569f4a8bb004c6",
+      "original_sha256": "596cf994ab1c4046ace54f6cab06ce171c9bac1c42be7d4a743ca378291b8b89",
+      "size_bytes": 5247
+    },
+    {
+      "path": "backend/app/remediation/export.py",
+      "change": "added",
+      "sha256": "41c1e6682b1f0869216969136cae4d6b79cbd15625be3c98cedf08ee204a57c2",
+      "original_sha256": null,
+      "size_bytes": 8921
+    },
+    {
+      "path": "backend/app/remediation/languages.py",
+      "change": "added",
+      "sha256": "1e7ec7b8d5af15965531f36d3092f7ebb1b92d8778d3ba4301d1b86f399d9014",
+      "original_sha256": null,
+      "size_bytes": 2378
+    },
+    {
+      "path": "backend/app/remediation/patching.py",
+      "change": "modified",
+      "sha256": "e44f516b0c369cca59701844d78b50aaf6c1bf0366a0bc888bf225d167ba6654",
+      "original_sha256": "0606913153697d852e2aec08b0da92e67f37d370b6daf48e07732a6cd64c0a15",
+      "size_bytes": 6703
+    },
+    {
+      "path": "backend/app/remediation/process_policy.py",
+      "change": "added",
+      "sha256": "7447c002be35339b41429d82ab81053867ac85776896f638bd1030f76fce8bce",
+      "original_sha256": null,
+      "size_bytes": 2290
+    },
+    {
+      "path": "backend/app/remediation/repository_source.py",
+      "change": "added",
+      "sha256": "3eaf43d67d136463e59dd60a96b36001be7b16173e71106c8755286ee98f6079",
+      "original_sha256": null,
+      "size_bytes": 6199
+    },
+    {
+      "path": "backend/app/remediation/security_verification.py",
+      "change": "added",
+      "sha256": "e2b6c554d07098a06cee3c142f44e39a3da2f07893dfa9bca8b002bcfa8d5266",
+      "original_sha256": null,
+      "size_bytes": 2331
+    },
+    {
+      "path": "backend/app/remediation/service.py",
+      "change": "modified",
+      "sha256": "690d248e01d6d1164f07427a28c42e001b3223ee1b67eb5304693ac44fdfdb8b",
+      "original_sha256": "950bb318517eec81bbb47af98905aec0a1b198e832f36587a836c49e4cda982b",
+      "size_bytes": 16248
+    },
+    {
+      "path": "backend/app/remediation/source.py",
+      "change": "modified",
+      "sha256": "eb188341bd6e24a9e6ff6729b20392ae74dce3d08ae09b7631d71aa3a91ef280",
+      "original_sha256": "7848e60d9abd6cea4a41f88c4e81fc04b5fdf9a7ff109f483a06b6d2a8191d7f",
+      "size_bytes": 4616
+    },
+    {
+      "path": "backend/app/remediation/strategies.py",
+      "change": "modified",
+      "sha256": "1556fd7c74e3fd3749c174f42e0e9db69e7fdf7ade7d5be669e14639eb13185a",
+      "original_sha256": "0b21d0166902f951b2bceb28c17d7dcc79bc78e34768fa4fa35d825a2a5d8779",
+      "size_bytes": 2650
+    },
+    {
+      "path": "backend/app/remediation/verification.py",
+      "change": "modified",
+      "sha256": "3af251c82637b94e710f953cb45519dbf1eb6f68ec699019ff5c6acac37339a9",
+      "original_sha256": "7c8a7cd4f6018654c5b68ee892ad9e9d16f43af5ef073743b4fcc3671b71c6a9",
+      "size_bytes": 2918
+    },
+    {
+      "path": "backend/app/repositories/intelligence.py",
+      "change": "modified",
+      "sha256": "db59cfbec9fa2b1f805f5d1a4dd460fa2bd5fca5b1897526f10617a71c6c5567",
+      "original_sha256": "453953d6ce1a255e9f1f7dbc00a076450d1ab1d004d021497dc25299abfe0b5a",
+      "size_bytes": 15247
+    },
+    {
+      "path": "backend/app/workers/celery_app.py",
+      "change": "modified",
+      "sha256": "880acc95bbce9fa028b06fa8e0624bc121f40919067f132e305a233f2696d8ba",
+      "original_sha256": "994d3e9cd4c0d18d486041a99f107638ba29e2c07efc1ce6b9019a83fca35769",
+      "size_bytes": 908
+    },
+    {
+      "path": "backend/app/workers/remediation_batch.py",
+      "change": "added",
+      "sha256": "975ae72f2d606c593d6f80961f662a9763996121e4e8a29fad4e4f310f67480e",
+      "original_sha256": null,
+      "size_bytes": 6312
+    },
+    {
+      "path": "backend/checks/test_remediation_workflow.py",
+      "change": "added",
+      "sha256": "bd399870b51ade38500e4c6ac91bfe644ea8df07b4db59735b360c03bdfc5ab7",
+      "original_sha256": null,
+      "size_bytes": 20246
+    },
+    {
+      "path": "backend/requirements.txt",
+      "change": "modified",
+      "sha256": "78316706d2337875754428e3d18b5aa0b695d7d66b1688312ed97ab2ddbdb7dc",
+      "original_sha256": "5ab497d4bfe3a74456d101890d0109f9982e7b35c0bc54c3cb9b2bc8826b4a02",
+      "size_bytes": 407
+    },
+    {
+      "path": "backend/scanner-requirements.txt",
+      "change": "added",
+      "sha256": "002cce8c523e7fa9bec3c2d789d583634f52c709d5641d76dea9fc66d4635d4d",
+      "original_sha256": null,
+      "size_bytes": 79
+    },
+    {
+      "path": "docker-compose.lab.yml",
+      "change": "modified",
+      "sha256": "89476be716bbc6e841bc608fce8a1c5163c3d2a112996f0a63ca90c271b6c4fe",
+      "original_sha256": "11ff8dac28b3b5b15994eb010e76c5ed2c1f2240b9a6c6069b4d981d0ae07176",
+      "size_bytes": 2275
+    },
+    {
+      "path": "docker-compose.yml",
+      "change": "modified",
+      "sha256": "0201fecb422ffee647afb503bb981857fdb561de013cf9369b666d5cc7904230",
+      "original_sha256": "9bba1fba92adde57d90b04c9ab09f5c4020ed785f063b47fe25567d9d163ba55",
+      "size_bytes": 3586
+    },
+    {
+      "path": "docs/ASE_UPDATE_API.md",
+      "change": "added",
+      "sha256": "d95fa11f80dcfc0a5de8b569ccf1bbde9e7b4400344a7d4a45157c389d47a655",
+      "original_sha256": null,
+      "size_bytes": 4762
+    },
+    {
+      "path": "docs/ASE_UPDATE_FILES.md",
+      "change": "added",
+      "sha256": "3612862b57dec45bb31bd793d6bd7188d299844001a5087def28a3e287bd79c0",
+      "original_sha256": null,
+      "size_bytes": 2012
+    },
+    {
+      "path": "docs/ASE_UPDATE_VALIDATION.md",
+      "change": "added",
+      "sha256": "c489d0d200cdc5b61f3b8ffec5d2ca869e98b7f84f5972275b8b78369bf44bf0",
+      "original_sha256": null,
+      "size_bytes": 9609
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "change": "modified",
+      "sha256": "29db857792ad4199852f82a825763cb42f73548abf564a7565ca03e6fda572bc",
+      "original_sha256": "44568afd7ae61dd5eef56cb26622f9d41aa76378f7d1e6c6de35e35aca5bb125",
+      "size_bytes": 13188
+    },
+    {
+      "path": "frontend/src/components/BulkRemediation.tsx",
+      "change": "modified",
+      "sha256": "962c6817f4c46c78b926c675198b9a8685b47d5fd9e2b35f24023b24e336a454",
+      "original_sha256": "b8b255ebb909491a23e3c2bd6ee4a9ef56fbf0b0e9d87520d8d920a56082b850",
+      "size_bytes": 8810
+    },
+    {
+      "path": "frontend/src/components/RemediationPanel.tsx",
+      "change": "modified",
+      "sha256": "ce58216cac10c7c11c665c72e5f2856ff3b653b6ee887d3334cd263cb4366fc8",
+      "original_sha256": "021a6ea3fa4597dd3c283bfa9dc58b97b4d8c02e502cf76751316efcf9beefbc",
+      "size_bytes": 10571
+    }
+  ]
+}

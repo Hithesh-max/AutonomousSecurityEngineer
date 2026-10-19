@@ -1,0 +1,27 @@
+ASE secure-share update
+
+Extract into the ASE project root and allow listed files to merge/overwrite. Do not replace .env or database files.
+
+Modified files:
+  .env.example
+  backend/alembic/env.py
+  backend/app/config/settings.py
+  backend/app/main.py
+  backend/app/models/__init__.py
+  backend/app/workers/celery_app.py
+  docker-compose.yml
+  frontend/index.html
+  frontend/src/App.tsx
+  frontend/src/api.ts
+  frontend/src/components/BulkRemediation.tsx
+
+Added files:
+  SECURE_FILE_SHARING_UPDATE.md
+  UPDATE_MANIFEST.txt
+  backend/alembic/versions/91a03c6ef827_secure_file_shares.py
+  backend/app/api/secure_shares.py
+  backend/app/models/secure_share.py
+  backend/app/workers/secure_share_cleanup.py
+  backend/tests/test_secure_shares.py
+  frontend/src/pages/SecureShareDownload.tsx
+  frontend/src/secureShareCrypto.ts

@@ -1,0 +1,29 @@
+services:
+  ase-vuln-lab:
+    build:
+      context: ./ase-vuln-demo
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8082:8080"
+    networks:
+      default:
+        aliases:
+          - ase-vuln-lab
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 32
+    mem_limit: 128m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+networks:
+  default:
+    external: true
+    name: ${ASE_DOCKER_NETWORK:-autonomoussecurityengineer_ase_lab_network}

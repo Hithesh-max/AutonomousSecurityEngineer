@@ -1,0 +1,128 @@
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ase_user
+      POSTGRES_PASSWORD: ase_password
+      POSTGRES_DB: ase_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ase_network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - ase_network
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+      - repository_data:/workspaces
+      - secure_share_data:/secure-shares
+    ports:
+      - "8000:8000"
+    environment:
+      - SCAN_WORKSPACE_ROOT=/workspaces
+      - DATABASE_URL=postgresql://ase_user:ase_password@db:5432/ase_db
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=${JWT_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - AI_PROVIDER=${AI_PROVIDER:-OpenAIProvider}
+      - AI_MODEL=${AI_MODEL:-gpt-4o}
+      - AI_API_KEY=${AI_API_KEY:-}
+      - AI_TIMEOUT_SECONDS=${AI_TIMEOUT_SECONDS:-45}
+      - AI_MAX_RETRIES=${AI_MAX_RETRIES:-1}
+      - AI_MAX_OUTPUT_TOKENS=${AI_MAX_OUTPUT_TOKENS:-1500}
+      - AI_MAX_CONTEXT_CHARS=${AI_MAX_CONTEXT_CHARS:-16000}
+      - AI_MAX_REQUESTS_PER_HOUR=${AI_MAX_REQUESTS_PER_HOUR:-20}
+      - ZIP_MAX_UPLOAD_BYTES=${ZIP_MAX_UPLOAD_BYTES:-20971520}
+      - ZIP_MAX_EXPANDED_BYTES=${ZIP_MAX_EXPANDED_BYTES:-104857600}
+      - ZIP_MAX_FILE_BYTES=${ZIP_MAX_FILE_BYTES:-5242880}
+      - ZIP_MAX_ENTRIES=${ZIP_MAX_ENTRIES:-3000}
+      - ZIP_MAX_COMPRESSION_RATIO=${ZIP_MAX_COMPRESSION_RATIO:-100}
+      - ZIP_UPLOAD_SECONDS=${ZIP_UPLOAD_SECONDS:-60}
+      - REPOSITORY_LIMIT_PER_USER=${REPOSITORY_LIMIT_PER_USER:-50}
+      - SECURE_SHARE_STORAGE_DIR=/secure-shares
+      - SECURE_SHARE_MAX_BYTES=${SECURE_SHARE_MAX_BYTES:-52428800}
+      - SECURE_SHARE_RETENTION_HOURS=${SECURE_SHARE_RETENTION_HOURS:-24}
+      - SECURE_SHARE_MAX_DOWNLOADS=${SECURE_SHARE_MAX_DOWNLOADS:-5}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - ase_network
+
+  worker:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    mem_limit: 1g
+    pids_limit: 128
+    command: celery -A app.workers.celery_app.celery worker -B --concurrency=2 --loglevel=info
+    volumes:
+      - ./backend:/app
+      - repository_data:/workspaces
+      - secure_share_data:/secure-shares
+    environment:
+      - DATABASE_URL=postgresql://ase_user:ase_password@db:5432/ase_db
+      - REDIS_URL=redis://redis:6379/0
+      - SCAN_WORKSPACE_ROOT=/workspaces
+      - JWT_SECRET=${JWT_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - AI_PROVIDER=${AI_PROVIDER:-OpenAIProvider}
+      - AI_MODEL=${AI_MODEL:-gpt-4o}
+      - AI_API_KEY=${AI_API_KEY:-}
+      - AI_TIMEOUT_SECONDS=${AI_TIMEOUT_SECONDS:-45}
+      - AI_MAX_RETRIES=${AI_MAX_RETRIES:-1}
+      - AI_MAX_OUTPUT_TOKENS=${AI_MAX_OUTPUT_TOKENS:-1500}
+      - AI_MAX_CONTEXT_CHARS=${AI_MAX_CONTEXT_CHARS:-16000}
+      - AI_MAX_REQUESTS_PER_HOUR=${AI_MAX_REQUESTS_PER_HOUR:-20}
+      - ZIP_MAX_UPLOAD_BYTES=${ZIP_MAX_UPLOAD_BYTES:-20971520}
+      - ZIP_MAX_EXPANDED_BYTES=${ZIP_MAX_EXPANDED_BYTES:-104857600}
+      - ZIP_MAX_FILE_BYTES=${ZIP_MAX_FILE_BYTES:-5242880}
+      - ZIP_MAX_ENTRIES=${ZIP_MAX_ENTRIES:-3000}
+      - ZIP_MAX_COMPRESSION_RATIO=${ZIP_MAX_COMPRESSION_RATIO:-100}
+      - ZIP_UPLOAD_SECONDS=${ZIP_UPLOAD_SECONDS:-60}
+      - REPOSITORY_LIMIT_PER_USER=${REPOSITORY_LIMIT_PER_USER:-50}
+      - SECURE_SHARE_STORAGE_DIR=/secure-shares
+      - SECURE_SHARE_MAX_BYTES=${SECURE_SHARE_MAX_BYTES:-52428800}
+      - SECURE_SHARE_RETENTION_HOURS=${SECURE_SHARE_RETENTION_HOURS:-24}
+      - SECURE_SHARE_MAX_DOWNLOADS=${SECURE_SHARE_MAX_DOWNLOADS:-5}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - ase_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    networks:
+      - ase_network
+
+volumes:
+  postgres_data:
+  repository_data:
+  secure_share_data:
+
+networks:
+  ase_network:
+    driver: bridge

@@ -1,0 +1,71 @@
+# Use together with docker-compose.yml; retains the original project and database volumes.
+services:
+  backend:
+    volumes:
+      - ./lab/app.py:/opt/ase-lab-source/app.py:ro
+    environment:
+      LAB_SCANNING_ENABLED: "true"
+      AI_PROVIDER: ${AI_PROVIDER:-gemini}
+      AI_MODEL: ${AI_MODEL:-gemini-2.5-flash}
+      AI_API_KEY: ${AI_API_KEY:-${GEMINI_API_KEY:-}}
+  worker:
+    volumes:
+      - ./lab/app.py:/opt/ase-lab-source/app.py:ro
+    environment:
+      AI_PROVIDER: ${AI_PROVIDER:-gemini}
+      AI_MODEL: ${AI_MODEL:-gemini-2.5-flash}
+      AI_API_KEY: ${AI_API_KEY:-${GEMINI_API_KEY:-}}
+      LAB_SCANNING_ENABLED: "true"
+      ZAP_API_KEY: ${ZAP_API_KEY:?Add a random ZAP_API_KEY to .env before starting the lab}
+    networks:
+      ase_network: {}
+      ase_lab_network:
+        ipv4_address: 172.30.250.2
+  ase-lab:
+    build: ./lab
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 128m
+    pids_limit: 64
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+    networks:
+      ase_lab_network:
+        ipv4_address: 172.30.250.3
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; assert urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=2).read() == b'ASE_LAB_READY'"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    environment:
+      ZAP_API_KEY: ${ZAP_API_KEY:?Add a random ZAP_API_KEY to .env before starting the lab}
+      JAVA_OPTS: -Xmx512m
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >-
+        exec zap.sh -daemon
+        -host 0.0.0.0
+        -port 8080
+        -config "api.key=$$ZAP_API_KEY"
+        -config "api.addrs.addr.name=^(localhost|127[.]0[.]0[.]1|172[.]30[.]250[.](2|4))$"
+        -config api.addrs.addr.regex=true
+        -config api.disablekey=false
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 1g
+    pids_limit: 256
+    networks:
+      ase_lab_network:
+        ipv4_address: 172.30.250.4
+    depends_on:
+      ase-lab:
+        condition: service_healthy
+# No lab or ZAP ports are published on the host. No source, Docker socket or DB mounts.
+networks:
+  ase_lab_network:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.250.0/28

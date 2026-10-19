@@ -1,0 +1,2 @@
+# Installed in an isolated scanner environment by Dockerfile.
+semgrep==1.180.0

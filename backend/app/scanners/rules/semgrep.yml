@@ -1,0 +1,57 @@
+# ASE local rule pack 1.0. No remote configuration or autofix.
+rules:
+  - id: ase.python.shell-enabled
+    languages: [python]
+    message: Shell execution is enabled. Review whether untrusted input can reach this command.
+    severity: WARNING
+    metadata:
+      category: COMMAND_INJECTION
+      cwe: CWE-78
+      confidence: MEDIUM
+      ase_severity: HIGH
+    pattern-either:
+      - pattern: subprocess.run(..., shell=True, ...)
+      - pattern: subprocess.Popen(..., shell=True, ...)
+      - pattern: subprocess.call(..., shell=True, ...)
+      - pattern: os.system(...)
+  - id: ase.python.request-to-sql
+    languages: [python]
+    message: Request-controlled data reaches a database execute call. Use bound query parameters and review the data flow.
+    severity: ERROR
+    mode: taint
+    metadata:
+      category: SQL_INJECTION
+      cwe: CWE-89
+      confidence: MEDIUM
+      ase_severity: HIGH
+    pattern-sources:
+      - pattern: request.args.get(...)
+      - pattern: request.form.get(...)
+    pattern-sinks:
+      - pattern: $DB.execute($QUERY)
+  - id: ase.python.input-to-eval
+    languages: [python]
+    message: Untrusted input reaches dynamic code evaluation.
+    severity: ERROR
+    mode: taint
+    metadata:
+      category: CODE_INJECTION
+      cwe: CWE-95
+      confidence: HIGH
+      ase_severity: HIGH
+    pattern-sources:
+      - pattern: request.args.get(...)
+      - pattern: input(...)
+    pattern-sinks:
+      - pattern: eval(...)
+      - pattern: exec(...)
+  - id: ase.javascript.eval
+    languages: [javascript, typescript]
+    message: Dynamic evaluation requires review; this rule does not prove user input reaches the call.
+    severity: WARNING
+    metadata:
+      category: CODE_INJECTION_REVIEW
+      cwe: CWE-95
+      confidence: LOW
+      ase_severity: MEDIUM
+    pattern: eval(...)

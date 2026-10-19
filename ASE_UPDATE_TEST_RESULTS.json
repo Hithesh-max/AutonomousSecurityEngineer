@@ -1,0 +1,58 @@
+{
+  "scope": "Core source-remediation, review, batch and export update; full enterprise directive not completed",
+  "baseline_existing_unit_tests": {
+    "passed": 67,
+    "passing_subtests": 25,
+    "database_fixture": "not loaded; pure unit selection"
+  },
+  "updated_existing_regression_tests": {
+    "passed": 67,
+    "passing_subtests": 25
+  },
+  "new_offline_workflow_security_tests": {
+    "passed": 41,
+    "persistence": "real SQLAlchemy with SQLite test-only harness",
+    "ai_provider": "explicit injected MockProvider; no real external provider call"
+  },
+  "frontend": {
+    "type_check": "PASS",
+    "production_build": "PASS",
+    "warning": "bundle over 500 kB"
+  },
+  "python_compilation": "PASS",
+  "migration": {
+    "revision": "f19b6c20aa01",
+    "parent": "a3f1c0de5b21",
+    "postgresql_sql_generation": "PASS",
+    "live_upgrade": "NOT_RUN"
+  },
+  "semgrep": {
+    "version": "1.180.0",
+    "before": {
+      "findings": 3,
+      "scanned_files": 1,
+      "errors": 0,
+      "rules": [
+        "ase.python.request-to-sql",
+        "ase.python.input-to-eval",
+        "ase.python.shell-enabled"
+      ]
+    },
+    "after_sql_parameter_binding": {
+      "remaining_findings": 2,
+      "sql_rule_status": "INCONCLUSIVE",
+      "other_rules_status": "STILL_VULNERABLE"
+    }
+  },
+  "not_executed": [
+    "real Gemini/OpenAI",
+    "Docker image build and live Nmap/ZAP",
+    "Redis/Celery real broker delivery",
+    "PostgreSQL runtime migration and locking",
+    "PowerShell execution",
+    "browser-driven frontend tests",
+    "uploaded-application build/function/dynamic verification"
+  ],
+  "original_zip_sha256": "6e035ba89ffebf54abcfc19a5951040fabd636f4521d6409173155fa006ec9b6",
+  "original_env_and_lab_preserved": true
+}

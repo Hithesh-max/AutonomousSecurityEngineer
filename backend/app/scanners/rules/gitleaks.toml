@@ -1,0 +1,3 @@
+title = "ASE operator-managed Gitleaks configuration 1.0"
+[extend]
+useDefault = true

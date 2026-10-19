@@ -1,0 +1,13 @@
+﻿services:
+  ase-lab:
+    ports:
+      - "127.0.0.1:8081:8080"
+    networks:
+      ase_lab_network:
+        ipv4_address: 172.30.250.3
+      lab_browser_network: {}
+
+networks:
+  lab_browser_network:
+    driver: bridge
+    internal: false

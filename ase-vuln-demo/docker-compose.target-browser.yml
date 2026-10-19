@@ -1,0 +1,4 @@
+﻿services:
+  ase-vuln-lab:
+    ports:
+      - "127.0.0.1:8082:8080"

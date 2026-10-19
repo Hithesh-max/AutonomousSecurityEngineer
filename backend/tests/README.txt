@@ -1,0 +1,1 @@
+Static scanner test input only. Do not run this intentionally unsafe application. The synthetic API key is nonfunctional. Expected: Flask/Python/dependency metadata; Semgrep shell/eval/SQL rules; Gitleaks generic credential. Exact results must be produced by real scanner execution, never seeded into the database.
