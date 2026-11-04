@@ -1,3 +1,15 @@
+<img width="731" height="558" alt="image" src="https://github.com/user-attachments/assets/f2baa722-722b-4222-9367-eb8b671f98f6" />
+<img width="1911" height="733" alt="image" src="https://github.com/user-attachments/assets/fbff1770-9bc5-407c-8d47-38b345c8a762" />
+<img width="1906" height="865" alt="image" src="https://github.com/user-attachments/assets/94d906e1-d2a4-410b-b825-95556790715b" />
+<img width="1293" height="826" alt="image" src="https://github.com/user-attachments/assets/f0c4b720-5b40-4f31-8f07-b50d12144273" />
+<img width="988" height="871" alt="image" src="https://github.com/user-attachments/assets/73026d1b-5199-4e63-bd8c-cf340dd8b4dd" />
+<img width="1043" height="540" alt="image" src="https://github.com/user-attachments/assets/8ff050ae-be4a-4fe5-a83a-c58fe328648d" />
+<img width="987" height="821" alt="image" src="https://github.com/user-attachments/assets/0860ac7f-fada-4b85-8369-1480045b58f8" />
+
+
+
+
+
 # ASE whole-project remediation workflow update
 
 This is a **backend + frontend** integration, not a frontend-only patch.
